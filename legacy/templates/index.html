@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bandersnatch - Explorez Votre Aventure</title>
+  <!-- Fonts and Icons -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="background"></div> <!-- Animated background -->
+
+  <!-- Loading screen -->
+  <div id="loading-screen" style="display: none;">
+    <div class="loading-text">Chargement en cours...</div>
+  </div>
+
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <h1>✨ BANDERSNATCH ✨</h1>
+      <nav>
+        <a href="#login">Se connecter</a>
+        <a href="#about" id="about-link">À propos</a>
+        <a href="#contact" id="contact-link">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Login section -->
+      <section id="login" class="card fade-in">
+        <h2>Bienvenue, Aventurier !</h2>
+        <p class="typewriter">Créez votre propre histoire ou connectez-vous pour commencer votre aventure !</p>
+        <form id="login-form">
+          <input type="email" placeholder="Email" id="email" required>
+          <input type="password" placeholder="Mot de passe" id="password" required>
+          <button type="submit" class="btn">Se connecter</button>
+        </form>
+        <div class="btn-group">
+          <button id="guest-button" class="btn-secondary">Jouer en tant qu'invité</button>
+          <button id="register-button" class="btn-secondary">Créer un compte</button>
+        </div>
+      </section>
+
+      <!-- About section hidden initially -->
+      <section id="about" class="card fade-in" style="display: none;">
+        <h2>À propos du projet <span style="color: #f4c542;">Bandersnatch</span></h2>
+        <p><span style="color: #f4c542;">Bandersnatch</span> est un jeu interactif où vous choisissez le déroulement de votre propre aventure. Vous pouvez décider du thème de votre histoire et prendre des décisions qui influenceront le parcours. Le jeu est conçu pour offrir une expérience unique à chaque joueur, avec une multitude de possibilités et de rebondissements selon les choix faits.</p>
+        <p>Plongez dans un univers fascinant où chaque décision compte et découvrez des scénarios passionnants. Êtes-vous prêt à commencer votre aventure ?</p>
+        <button id="close-about" class="btn-secondary">Fermer</button>
+      </section>
+
+      <!-- Contact section hidden initially -->
+      <section id="contact" class="card fade-in" style="display: none;">
+        <h2>Contactez-nous</h2>
+        <p>Si vous avez des questions ou des suggestions, n'hésitez pas à nous contacter !</p>
+        <p><strong>Terrel NUENTSA</strong><br>Email : <span style="color: #f4c542;">43020094@parisnanterre.fr</span></p>
+        <p><strong>Daniel BADOYAN</strong><br>Email : <span style="color: #f4c542;">43003965@parisnanterre.fr</span></p>
+        <p><strong>Romain THIERRY</strong><br>Email : <span style="color: #f4c542;">43010388@parisnanterre.fr</span></p>
+        <button id="close-contact" class="btn-secondary">Fermer</button>
+      </section>
+
+      <!-- Adventure creation interface -->
+      <section id="create-adventure-interface" class="card fade-in" style="display:none;">
+        <h2>Créez votre aventure</h2>
+        <p>Entrez un thème pour générer une aventure unique :</p>
+        <input type="text" id="story-theme" placeholder="Ex : Magie, Aventure, Mystère">
+        <button id="generate-story" class="btn">Créer mon aventure</button>
+      </section>
+
+      <!-- Choice interface -->
+      <section id="game-interface" style="display:none;" class="card fade-in">
+        <h2>Maintenant, c'est à vous de faire avancer l'histoire !</h2>
+        <div id="story-container" style="display:none;">
+          <div class="story-box">
+            <div id="previous-story" class="story-bubble"></div>
+            <div id="current-story" class="story-bubble"></div>
+          </div>
+          <div id="choices" class="choices-container"></div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <p>© 2024 Bandersnatch. Tous droits réservés. | <a href="#privacy">Politique de confidentialité</a></p>
+    </footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

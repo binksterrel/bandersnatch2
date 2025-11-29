@@ -1,0 +1,435 @@
+/* Font and Background */
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  background: linear-gradient(135deg, #1a1a40, #1a2a50); /* Background gradient */
+  overflow-y: auto; /* Allow vertical scrolling */
+}
+
+/* Animated background */
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 0%, transparent 70%),
+              linear-gradient(135deg, #ff6b6b, #f4c542, #3d84d1);
+  background-size: 200% 200%;
+  animation: backgroundAnimation 15s infinite; /* Background animation */
+  z-index: -1;
+}
+
+/* Background animation */
+@keyframes backgroundAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Typewriter effect */
+.typewriter {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid #f4c542; /* Cursor */
+  animation: typing 4s steps(40, end), blink 0.5s step-end infinite; /* Typewriter animation */
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink {
+  from { border-color: transparent; }
+  to { border-color: #f4c542; }
+}
+
+/* General Style */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: 100vh; /* Ensure the container occupies at least the height of the window */
+}
+
+/* Header */
+header {
+  text-align: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.8); /* Dark background */
+  border-radius: 10px;
+}
+
+header h1 {
+  font-size: 3em;
+  margin: 0;
+  color: #f4c542;
+  text-shadow: 2px 2px 5px #000; /* Text shadow */
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 10px;
+  font-weight: 600;
+}
+
+nav a:hover {
+  color: #f4c542;
+}
+
+/* Buttons */
+button {
+  background-color: #f4c542;
+  color: #292a50;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1.1em;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background-color: #d4aa35;
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: #fff;
+  border: 2px solid #f4c542;
+  margin-top: 10px;
+}
+
+.btn-secondary:hover {
+  background-color: #f4c542;
+  color: #292a50;
+}
+
+/* Sections */
+.card {
+  background: rgba(0, 0, 0, 0.85);
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.story-box {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  border-radius: 10px;
+  margin-top: 20px;
+  max-width: 100%; /* Ensure the text container has a maximum width */
+}
+
+/* Adventure creation interface */
+#create-adventure-interface {
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+#create-adventure-interface h2 {
+  color: #f4c542;
+}
+
+#create-adventure-interface input[type="text"] {
+  width: 100%;
+  padding: 15px;
+  margin: 15px 0;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid #f4c542;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 1.1em;
+  transition: background-color 0.3s;
+}
+
+#create-adventure-interface input[type="text"]:focus {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #f4c542;
+}
+
+/* Choice interface */
+#game-interface {
+  background-color: rgba(0, 0, 0, 0.85);
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 10px;
+  display: none;
+}
+
+#game-interface h2 {
+  color: #f4c542;
+}
+
+.choices-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 10px; /* Add space between buttons */
+}
+
+.choices-container button {
+  background-color: #f4c542;
+  border: none;
+  color: #292a50;
+  font-size: 16px;
+  padding: 12px 20px;
+  margin: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  flex: 1; /* Ensure buttons take the same width */
+}
+
+.choices-container button:hover {
+  background-color: #d49c3d;
+}
+
+/* Transition effects */
+.fade-in {
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Modernized text area */
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+  width: 100%;
+  padding: 15px 20px;
+  margin: 15px 0;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid #f4c542;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 1em;
+  outline: none;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="text"]:focus {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #f4c542;
+  box-shadow: 0 0 10px rgba(244, 197, 66, 0.8);
+}
+
+input[type="email"]::placeholder,
+input[type="password"]::placeholder,
+input[type="text"]::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+  font-style: italic;
+}
+
+/* Style for the "About" section with scrollbar */
+#about {
+  max-height: 70vh; /* Limit height to 70% of the window */
+  overflow-y: auto; /* Add vertical scrollbar if necessary */
+  padding-right: 10px; /* Add space to avoid text touching the border */
+}
+
+/* Style for the "Contact" section with scrollbar */
+#contact {
+  max-height: 70vh; /* Limit height to 70% of the window */
+  overflow-y: auto; /* Add vertical scrollbar if necessary */
+  padding-right: 10px; /* Add space to avoid text touching the border */
+}
+
+/* Style for custom scrollbar */
+#contact::-webkit-scrollbar {
+  width: 8px;
+}
+
+#contact::-webkit-scrollbar-thumb {
+  background: #f4c542; /* Scrollbar color */
+  border-radius: 4px;
+}
+
+#contact::-webkit-scrollbar-thumb:hover {
+  background: #d4aa35; /* Hover color */
+}
+
+#contact::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1); /* Scrollbar background */
+}
+
+/* Smooth scrolling behavior for the section */
+html {
+  scroll-behavior: smooth; /* Enable smooth scrolling */
+}
+
+/* Style for the "About" section scrollbar */
+#about::-webkit-scrollbar {
+  width: 8px;
+}
+
+#about::-webkit-scrollbar-thumb {
+  background: #f4c542; /* Scrollbar color */
+  border-radius: 4px;
+}
+
+#about::-webkit-scrollbar-thumb:hover {
+  background: #d4aa35; /* Hover color */
+}
+
+#about::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1); /* Scrollbar background */
+}
+
+/* Style for the loading screen */
+#loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 0%, transparent 70%),
+    linear-gradient(135deg, #ff6b6b, #f4c542, #3d84d1); /* Radial and linear gradient combined */
+  background-size: 200% 200%; /* Gradient sizes for animation */
+  animation: gradientAnimation 10s ease infinite; /* Gradient animation */
+  display: flex;
+  justify-content: center; /* Horizontal centering */
+  align-items: center; /* Vertical centering */
+  color: #fff;
+  font-size: 1.5em;
+  z-index: 9999;
+  overflow: hidden; /* Prevent any scrolling during loading */
+}
+
+/* Gradient background animation */
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Style for the loading screen content */
+#loading-screen .loading-text {
+  text-align: center; /* Horizontal centering */
+  font-size: 1em; /* Font size */
+  font-weight: bold;
+  animation: loadingTextAnimation 1.5s infinite; /* Text pulsing animation */
+}
+
+/* Text pulsing animation */
+@keyframes loadingTextAnimation {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
+
+.spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #f4c542;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin-right: 10px;
+}
+
+/* Spinner animation */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Specific section for the game */
+#game-interface {
+  display: block;
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Button animation for the game */
+.choices-container button {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Style for the story section */
+#story-container {
+  max-height: 400px; /* Limit height to 400px */
+  overflow-y: auto; /* Add vertical scrollbar if necessary */
+  padding-right: 10px; /* Add space to avoid text touching the border */
+}
+
+/* Style for custom scrollbar */
+#story-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+#story-container::-webkit-scrollbar-thumb {
+  background: #f4c542; /* Scrollbar color */
+  border-radius: 4px;
+}
+
+#story-container::-webkit-scrollbar-thumb:hover {
+  background: #d4aa35; /* Hover color */
+}
+
+#story-container::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1); /* Scrollbar background */
+}
+
+/* Style for the story text */
+#story-text {
+  white-space: normal; /* Allow line breaks */
+  word-wrap: break-word; /* Force line breaks for long words */
+  max-width: 100%; /* Ensure text does not exceed container width */
+}
+
+/* Style for story bubbles */
+.story-bubble {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  padding: 15px;
+  margin: 10px 0;
+  max-width: 100%;
+  word-wrap: break-word;
+}
+
+/* Style for previous story bubble */
+#previous-story {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 15px;
+  margin: 10px 0;
+  max-width: 100%;
+  word-wrap: break-word;
+}
+
+/* Style for current story bubble */
+#current-story {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  padding: 15px;
+  margin: 10px 0;
+  max-width: 100%;
+  word-wrap: break-word;
+}
