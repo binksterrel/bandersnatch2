@@ -106,7 +106,7 @@ export function GameInterface({ story, choices, history, onChoice, isLoading }: 
           )}
 
           {/* Choices Container */}
-          <div className={`${showChoicesMobile ? 'block' : 'hidden'} md:block grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6`}>
+          <div className={`${showChoicesMobile ? 'block' : 'hidden'} md:block grid grid-cols-1 md:flex md:flex-row gap-4 md:gap-6`}>
             <AnimatePresence>
               {!isLoading &&
                 !isTyping &&
@@ -118,7 +118,7 @@ export function GameInterface({ story, choices, history, onChoice, isLoading }: 
                     exit={{ opacity: 0, y: 20 }}
                     transition={{ delay: index * 0.1, duration: 0.5 }}
                     onClick={() => onChoice(choice)}
-                    className="glass-card p-6 md:p-8 rounded-lg text-left group"
+                    className="glass-card p-6 md:p-8 rounded-lg text-left group md:flex-1"
                   >
                     <span className="block text-xs uppercase tracking-widest text-white/40 mb-3 group-hover:text-white/60 transition-colors">
                       {index + 1}
