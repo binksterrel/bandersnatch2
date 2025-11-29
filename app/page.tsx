@@ -3,9 +3,11 @@
 import { useState } from "react"
 import { AdventureSetup } from "@/components/AdventureSetup"
 import { GameInterface } from "@/components/GameInterface"
+import { SplashScreen } from "@/components/SplashScreen"
 import { AnimatePresence, motion } from "framer-motion"
 
 export default function Home() {
+  const [showSplash, setShowSplash] = useState(true)
   const [gameState, setGameState] = useState<"setup" | "playing">("setup")
   const [isLoading, setIsLoading] = useState(false)
   const [story, setStory] = useState("")
@@ -70,6 +72,10 @@ export default function Home() {
     } finally {
       setIsLoading(false)
     }
+  }
+
+  if (showSplash) {
+    return <SplashScreen onContinue={() => setShowSplash(false)} />
   }
 
   return (
