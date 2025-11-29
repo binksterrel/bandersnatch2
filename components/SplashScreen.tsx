@@ -23,7 +23,7 @@ export function SplashScreen({ onContinue }: SplashScreenProps) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.8 }}
         >
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-light tracking-tight mb-4">Bandersnatch</h1>
+          <h1 className="hero-text font-bold tracking-tight text-white mb-4">BANDERSNATCH</h1>
           <div className="h-px w-24 mx-auto bg-white/20" />
         </motion.div>
 
