@@ -38,7 +38,7 @@ export function GameInterface({ story, choices, history, onChoice, isLoading }: 
         setIsTyping(false)
         clearInterval(typingInterval)
       }
-    }, 10)
+    }, 30)
 
     return () => clearInterval(typingInterval)
   }, [story])
