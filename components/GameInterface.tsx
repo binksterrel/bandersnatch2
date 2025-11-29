@@ -18,6 +18,34 @@ export function GameInterface({ story, choices, history, onChoice, isLoading }: 
   const [displayedText, setDisplayedText] = useState("")
   const [isTyping, setIsTyping] = useState(true)
   const [showChoicesMobile, setShowChoicesMobile] = useState(false)
+  const [isMuted, setIsMuted] = useState(false)
+
+  // TTS Effect
+  useEffect(() => {
+    if (!story || isMuted) {
+      window.speechSynthesis.cancel()
+      return
+    }
+
+    // Cancel any ongoing speech
+    window.speechSynthesis.cancel()
+
+    const utterance = new SpeechSynthesisUtterance(story)
+    utterance.lang = "fr-FR"
+    utterance.rate = 1.0 // Normal speed
+    utterance.pitch = 1.0
+
+    // Optional: Select a specific voice if available
+    // const voices = window.speechSynthesis.getVoices()
+    // const frenchVoice = voices.find(v => v.lang.includes('fr'))
+    // if (frenchVoice) utterance.voice = frenchVoice
+
+    window.speechSynthesis.speak(utterance)
+
+    return () => {
+      window.speechSynthesis.cancel()
+    }
+  }, [story, isMuted])
 
   useEffect(() => {
     setIsTyping(true)
@@ -51,7 +79,20 @@ export function GameInterface({ story, choices, history, onChoice, isLoading }: 
   }, [displayedText, isTyping])
 
   return (
-    <div className="w-full min-h-screen flex flex-col">
+    <div className="w-full min-h-screen flex flex-col relative">
+      {/* Mute Button */}
+      <button
+        onClick={() => setIsMuted(!isMuted)}
+        className="fixed top-6 right-6 z-50 p-3 bg-black/40 backdrop-blur-md border border-white/10 rounded-full text-white/70 hover:text-white hover:bg-white/10 transition-all"
+        title={isMuted ? "Activer le son" : "Couper le son"}
+      >
+        {isMuted ? (
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="1" y1="1" x2="23" y2="23"></line><path d="M9 9v6a3 3 0 0 0 5.12 2.12M15 9.34V4a3 3 0 0 0-5.94-.6"></path><path d="M17 16.95A7 7 0 0 1 5 12v-2m14 0v2a7 7 0 0 1-.11 1.23"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+        ) : (
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+        )}
+      </button>
+
       <div className="flex-1 overflow-y-auto custom-scrollbar px-6 md:px-12 lg:px-24 py-12 md:py-20" ref={scrollRef}>
         <div className="max-w-4xl mx-auto space-y-12 md:space-y-16 pb-64">
           {history.map((segment, index) => (
