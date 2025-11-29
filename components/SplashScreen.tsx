@@ -14,7 +14,7 @@ export function SplashScreen({ onContinue }: SplashScreenProps) {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.8 }}
-      className="fixed inset-0 z-50 h-screen w-screen overflow-hidden flex items-center justify-center p-6 md:p-12 bg-black"
+      className="fixed inset-0 z-50 h-screen w-screen overflow-hidden flex items-center justify-center p-6 md:p-12"
     >
       <div className="max-w-3xl w-full space-y-12 text-center">
         {/* Title */}
@@ -23,7 +23,7 @@ export function SplashScreen({ onContinue }: SplashScreenProps) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.8 }}
         >
-          <h1 className="hero-text font-bold tracking-tight text-white mb-4">BANDERSNATCH</h1>
+          <h1 className="hero-text font-bold tracking-tight text-white mb-">BANDERSNATCH</h1>
           <div className="h-px w-24 mx-auto bg-white/20" />
         </motion.div>
 
