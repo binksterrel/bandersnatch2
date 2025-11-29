@@ -13,6 +13,8 @@ interface GameInterfaceProps {
 
 export function GameInterface({ story, choices, history, onChoice, isLoading }: GameInterfaceProps) {
   const scrollRef = useRef<HTMLDivElement>(null)
+  const currentSegmentRef = useRef<HTMLDivElement>(null)
+  const cursorRef = useRef<HTMLSpanElement>(null)
   const [displayedText, setDisplayedText] = useState("")
   const [isTyping, setIsTyping] = useState(true)
 
@@ -20,6 +22,12 @@ export function GameInterface({ story, choices, history, onChoice, isLoading }: 
     setIsTyping(true)
     setDisplayedText("")
     let currentIndex = 0
+    
+    // Scroll to the start of the new segment when story changes
+    if (currentSegmentRef.current) {
+      currentSegmentRef.current.scrollIntoView({ behavior: "smooth", block: "start" })
+    }
+
     const typingInterval = setInterval(() => {
       if (currentIndex <= story.length) {
         setDisplayedText(story.slice(0, currentIndex))
@@ -33,11 +41,12 @@ export function GameInterface({ story, choices, history, onChoice, isLoading }: 
     return () => clearInterval(typingInterval)
   }, [story])
 
+  // Auto-scroll to keep cursor in view while typing
   useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight
+    if (isTyping && cursorRef.current) {
+      cursorRef.current.scrollIntoView({ behavior: "smooth", block: "nearest" })
     }
-  }, [history, displayedText])
+  }, [displayedText, isTyping])
 
   return (
     <div className="w-full min-h-screen flex flex-col">
@@ -55,13 +64,19 @@ export function GameInterface({ story, choices, history, onChoice, isLoading }: 
           ))}
 
           <motion.div
+            ref={currentSegmentRef}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6 }}
             className="story-text text-white leading-relaxed"
           >
             {displayedText}
-            {isTyping && <span className="inline-block w-1 h-6 md:h-8 bg-white ml-1 animate-pulse" />}
+            {isTyping && (
+              <span 
+                ref={cursorRef}
+                className="inline-block w-1 h-6 md:h-8 bg-white ml-1 animate-pulse align-middle" 
+              />
+            )}
           </motion.div>
 
           {isLoading && (
