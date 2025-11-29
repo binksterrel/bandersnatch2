@@ -1,30 +1,59 @@
-# ProjetinfoBandersnatchl2
+# Bandersnatch 2.0
 
-*Automatically synced with your [v0.app](https://v0.app) deployments*
+Une expérience narrative interactive propulsée par l'intelligence artificielle.
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/binksterrels-projects/v0-projetinfo-bandersnatchl2)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.app-black?style=for-the-badge)](https://v0.app/chat/02yYeDwuh1R)
+![Bandersnatch Preview](/app/opengraph-image.png)
 
-## Overview
+## À propos
 
-This repository will stay in sync with your deployed chats on [v0.app](https://v0.app).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.app](https://v0.app).
+Bandersnatch 2.0 est la refonte complète d'un projet universitaire originalement créé par **Terrel NUENTSA**, **Daniel BADOYAN** et **Romain THIERRY**. Cette nouvelle version modernise l'expérience utilisateur et intègre l'IA pour générer des histoires uniques et infinies.
 
-## Deployment
+## Fonctionnalités
 
-Your project is live at:
+- **Narration IA** : Chaque aventure est générée dynamiquement, offrant une rejouabilité infinie.
+- **Choix Interactifs** : Vos décisions influencent directement la suite de l'histoire.
+- **Immersion Visuelle** : Interface moderne avec des animations fluides et un fond d'écran dynamique (ShaderGradient).
+- **Design Réactif** : Compatible mobile et desktop.
 
-**[https://vercel.com/binksterrels-projects/v0-projetinfo-bandersnatchl2](https://vercel.com/binksterrels-projects/v0-projetinfo-bandersnatchl2)**
+## Technologies
 
-## Build your app
+Ce projet utilise les dernières technologies web :
 
-Continue building your app on:
+- [Next.js 15](https://nextjs.org/) - Framework React
+- [React 19](https://react.dev/) - Bibliothèque UI
+- [Tailwind CSS](https://tailwindcss.com/) - Styles utilitaires
+- [Framer Motion](https://www.framer.com/motion/) - Animations
+- [ShaderGradient](https://www.shadergradient.co/) - Arrière-plans 3D dynamiques
+- [Vercel AI SDK](https://sdk.vercel.ai/docs) - Intégration de l'IA
 
-**[https://v0.app/chat/02yYeDwuh1R](https://v0.app/chat/02yYeDwuh1R)**
+## Installation
 
-## How It Works
+1. Cloner le dépôt :
+   ```bash
+   git clone https://github.com/binksterrel/bandersnatch2.git
+   cd bandersnatch2
+   ```
 
-1. Create and modify your project using [v0.app](https://v0.app)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+2. Installer les dépendances :
+   ```bash
+   npm install
+   # ou
+   pnpm install
+   ```
+
+3. Lancer le serveur de développement :
+   ```bash
+   npm run dev
+   ```
+
+4. Ouvrir [http://localhost:3000](http://localhost:3000) dans votre navigateur.
+
+## Crédits
+
+**Version Originale (L2 Info) :**
+- Terrel NUENTSA
+- Daniel BADOYAN
+- Romain THIERRY
+
+**Refonte v2.0 :**
+- Terrel NUENTSA
