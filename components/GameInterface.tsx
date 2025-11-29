@@ -17,10 +17,12 @@ export function GameInterface({ story, choices, history, onChoice, isLoading }: 
   const cursorRef = useRef<HTMLSpanElement>(null)
   const [displayedText, setDisplayedText] = useState("")
   const [isTyping, setIsTyping] = useState(true)
+  const [showChoicesMobile, setShowChoicesMobile] = useState(false)
 
   useEffect(() => {
     setIsTyping(true)
     setDisplayedText("")
+    setShowChoicesMobile(false) // Reset mobile choices visibility on new segment
     let currentIndex = 0
     
     // Scroll to the start of the new segment when story changes
@@ -90,29 +92,44 @@ export function GameInterface({ story, choices, history, onChoice, isLoading }: 
       </div>
 
       <div className="fixed bottom-0 left-0 w-full bg-gradient-to-t from-black via-black to-transparent pt-32 pb-8 md:pb-12 px-6 md:px-12 lg:px-24">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-          <AnimatePresence>
-            {!isLoading &&
-              !isTyping &&
-              choices.map((choice, index) => (
-                <motion.button
-                  key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 20 }}
-                  transition={{ delay: index * 0.1, duration: 0.5 }}
-                  onClick={() => onChoice(choice)}
-                  className="glass-card p-6 md:p-8 rounded-lg text-left group"
-                >
-                  <span className="block text-xs uppercase tracking-widest text-white/40 mb-3 group-hover:text-white/60 transition-colors">
-                    {index + 1}
-                  </span>
-                  <span className="block text-base md:text-lg text-white/80 group-hover:text-white leading-relaxed">
-                    {choice}
-                  </span>
-                </motion.button>
-              ))}
-          </AnimatePresence>
+        <div className="max-w-6xl mx-auto">
+          {/* Mobile Toggle Button */}
+          {!isLoading && !isTyping && (
+            <div className="md:hidden mb-4 flex justify-center">
+              <button
+                onClick={() => setShowChoicesMobile(!showChoicesMobile)}
+                className="px-6 py-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-white font-medium hover:bg-white/20 transition-all"
+              >
+                {showChoicesMobile ? "Masquer les choix" : "Voir les choix"}
+              </button>
+            </div>
+          )}
+
+          {/* Choices Container */}
+          <div className={`${showChoicesMobile ? 'block' : 'hidden'} md:block grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6`}>
+            <AnimatePresence>
+              {!isLoading &&
+                !isTyping &&
+                choices.map((choice, index) => (
+                  <motion.button
+                    key={index}
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 20 }}
+                    transition={{ delay: index * 0.1, duration: 0.5 }}
+                    onClick={() => onChoice(choice)}
+                    className="glass-card p-6 md:p-8 rounded-lg text-left group"
+                  >
+                    <span className="block text-xs uppercase tracking-widest text-white/40 mb-3 group-hover:text-white/60 transition-colors">
+                      {index + 1}
+                    </span>
+                    <span className="block text-base md:text-lg text-white/80 group-hover:text-white leading-relaxed">
+                      {choice}
+                    </span>
+                  </motion.button>
+                ))}
+            </AnimatePresence>
+          </div>
         </div>
       </div>
     </div>
