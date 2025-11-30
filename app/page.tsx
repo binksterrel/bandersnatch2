@@ -13,11 +13,12 @@ export default function Home() {
   const [story, setStory] = useState("")
   const [choices, setChoices] = useState<string[]>([])
   const [history, setHistory] = useState<string[]>([])
+  const [progression, setProgression] = useState(0)
 
   const startAdventure = async (theme: string) => {
     setIsLoading(true)
     try {
-      console.log("[v0] Starting adventure with theme:", theme)
+      console.log("[Bandersnatch] Starting adventure with theme:", theme)
       const res = await fetch("/api/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -30,17 +31,19 @@ export default function Home() {
       }
 
       const data = await res.json()
-      console.log("[v0] Received adventure data:", data)
+      console.log("[Bandersnatch] Received adventure data:", data)
 
       if (data.story && data.choices) {
         setStory(data.story)
         setChoices(data.choices)
+        setHistory([])
+        setProgression(1)
         setGameState("playing")
       } else {
         throw new Error("Invalid response format")
       }
     } catch (error) {
-      console.error("[v0] Failed to start adventure:", error)
+      console.error("[Bandersnatch] Failed to start adventure:", error)
       const errorMessage = error instanceof Error ? error.message : "Une erreur est survenue"
       alert(`Failed to start adventure: ${errorMessage}`)
     } finally {
@@ -58,17 +61,57 @@ export default function Home() {
       const res = await fetch("/api/continue", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ history: newHistory, choice }),
+        body: JSON.stringify({ 
+          history: newHistory, 
+          choice,
+          progression 
+        }),
       })
       const data = await res.json()
 
-      if (data.story && data.choices) {
+      if (data.story && Array.isArray(data.choices)) {
         setStory(data.story)
         setChoices(data.choices)
+        if (data.progression) {
+          setProgression(data.progression)
+        }
       }
     } catch (error) {
       console.error("Failed to continue adventure:", error)
       alert("Une erreur est survenue lors de la suite de l'aventure.")
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const handleEndStory = async () => {
+    if (!confirm("Voulez-vous vraiment terminer l'histoire maintenant ?")) return
+
+    setIsLoading(true)
+    const choice = "Je décide de mettre fin à l'aventure maintenant."
+    const newHistory = [...history, story, `> ${choice}`]
+    setHistory(newHistory)
+
+    try {
+      const res = await fetch("/api/continue", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ 
+          history: newHistory, 
+          choice,
+          progression: 10 // Force end by exceeding max progression
+        }),
+      })
+      const data = await res.json()
+
+      if (data.story) {
+        setStory(data.story)
+        setChoices([]) // Clear choices to end game
+        setProgression(10)
+      }
+    } catch (error) {
+      console.error("Failed to end adventure:", error)
+      alert("Impossible de terminer l'histoire.")
     } finally {
       setIsLoading(false)
     }
@@ -103,6 +146,7 @@ export default function Home() {
             choices={choices}
             history={history}
             onChoice={handleChoice}
+            onEnd={handleEndStory}
             isLoading={isLoading}
           />
         </motion.div>

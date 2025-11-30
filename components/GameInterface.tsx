@@ -8,10 +8,11 @@ interface GameInterfaceProps {
   choices: string[]
   history: string[]
   onChoice: (choice: string) => void
+  onEnd: () => void
   isLoading: boolean
 }
 
-export function GameInterface({ story, choices, history, onChoice, isLoading }: GameInterfaceProps) {
+export function GameInterface({ story, choices, history, onChoice, onEnd, isLoading }: GameInterfaceProps) {
   const scrollRef = useRef<HTMLDivElement>(null)
   const currentSegmentRef = useRef<HTMLDivElement>(null)
   const cursorRef = useRef<HTMLSpanElement>(null)
@@ -112,6 +113,17 @@ export function GameInterface({ story, choices, history, onChoice, isLoading }: 
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
           )}
         </button>
+
+        {/* Finish Button */}
+        {choices.length > 0 && (
+          <button
+            onClick={onEnd}
+            className="p-3 bg-red-500/20 backdrop-blur-md border border-red-500/30 rounded-full text-red-200 hover:text-white hover:bg-red-500/40 transition-all"
+            title="Terminer l'histoire maintenant"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg>
+          </button>
+        )}
       </div>
 
       <div className="flex-1 overflow-y-auto custom-scrollbar px-6 md:px-12 lg:px-24 py-12 md:py-20" ref={scrollRef}>
