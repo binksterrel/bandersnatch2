@@ -117,6 +117,17 @@ export default function Home() {
     }
   }
 
+  const handleBack = () => {
+    if (confirm("Êtes-vous sûr de vouloir quitter ? Votre progression sera perdue.")) {
+      window.speechSynthesis.cancel()
+      setGameState("setup")
+      setStory("")
+      setChoices([])
+      setHistory([])
+      setProgression(0)
+    }
+  }
+
   if (showSplash) {
     return <SplashScreen onContinue={() => setShowSplash(false)} />
   }
@@ -147,6 +158,7 @@ export default function Home() {
             history={history}
             onChoice={handleChoice}
             onEnd={handleEndStory}
+            onBack={handleBack}
             isLoading={isLoading}
           />
         </motion.div>

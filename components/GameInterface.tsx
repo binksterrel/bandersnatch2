@@ -9,10 +9,11 @@ interface GameInterfaceProps {
   history: string[]
   onChoice: (choice: string) => void
   onEnd: () => void
+  onBack: () => void
   isLoading: boolean
 }
 
-export function GameInterface({ story, choices, history, onChoice, onEnd, isLoading }: GameInterfaceProps) {
+export function GameInterface({ story, choices, history, onChoice, onEnd, onBack, isLoading }: GameInterfaceProps) {
   const scrollRef = useRef<HTMLDivElement>(null)
   const currentSegmentRef = useRef<HTMLDivElement>(null)
   const cursorRef = useRef<HTMLSpanElement>(null)
@@ -90,6 +91,15 @@ export function GameInterface({ story, choices, history, onChoice, onEnd, isLoad
 
   return (
     <div className="w-full min-h-screen flex flex-col relative">
+      {/* Back Button */}
+      <button
+        onClick={onBack}
+        className="fixed top-6 left-6 z-50 p-3 bg-black/40 backdrop-blur-md border border-white/10 rounded-full text-white/70 hover:text-white hover:bg-white/10 transition-all"
+        title="Retour au menu"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+      </button>
+
       {/* Audio Controls */}
       <div className="fixed top-6 right-6 z-50 flex gap-3">
         {/* Speed Toggle */}
